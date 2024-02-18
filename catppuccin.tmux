@@ -165,6 +165,7 @@ build_window_format() {
     if [ "$window_number_position" = "right" ]
     then
       local show_left_separator="#[fg=$thm_bg,bg=default,nobold,nounderscore,noitalics]$window_left_separator"
+      # local show_right_separator="#[fg=$color,bg=default]$window_right_separator"
       local show_right_separator="#[fg=$color,bg=default]$window_right_separator"
     fi
 

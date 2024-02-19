@@ -324,12 +324,17 @@ main() {
 
   # status
   set status "on"
-  #set status-bg "${thm_bg}"
   set status-bg default
+  set status-style bg=default
+  set status-left-style fg=default,bg=default
   set status-justify "left"
   set status-left-length "100"
   set status-right-length "100"
-  set status-left-style fg=default,bg=default
+  set status-position top
+
+  # sadded blank line below status
+  set status 2
+  set 'status-format[1]' ''
 
   # messages
   set message-style "fg=${thm_cyan},bg=${thm_gray},align=centre"

@@ -6,9 +6,10 @@ show_git() {
     return
   fi
 
-  local lavender="#b4befe"
+  # local lavender="#b4befe"
+  local flamingo="#f2cdcd"
   local icon=$(get_tmux_option "@catppuccin_git_icon" "")
-  local color=$(get_tmux_option "@catppuccin_git_color" "$lavender")
+  local color=$(get_tmux_option "@catppuccin_git_color" "$flamingo")
   local prefix="#[fg=$color,bg=default,nobold,nounderscore,noitalics] #[fg=$thm_gray,bg=$color,nobold,nounderscore,noitalics]$icon #[fg=$thm_fg,bg=$thm_gray]"
   local suffix="#[fg=$thm_gray,bg=default,nobold,nounderscore,noitalics]"
 

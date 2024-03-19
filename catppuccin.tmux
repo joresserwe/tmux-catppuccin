@@ -329,7 +329,6 @@ main() {
   local modules_pane_path=$PLUGIN_DIR/pane
 
   # status
-<<<<<<< HEAD
   local status_default=$(get_tmux_option "@catppuccin_status_default" "on")
   local status_justify=$(get_tmux_option "@catppuccin_status_justify" "left")
   set status "$status_default"

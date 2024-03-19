@@ -37,24 +37,31 @@ setw() {
 
 build_window_icon() {
   local window_status_icon_enable=$(get_tmux_option "@catppuccin_window_status_icon_enable" "yes")
-
   local custom_icon_window_last=$(get_tmux_option "@catppuccin_icon_window_last" "󰖰")
   local custom_icon_window_current=$(get_tmux_option "@catppuccin_icon_window_current" "󰖯")
   local custom_icon_window_zoom=$(get_tmux_option "@catppuccin_icon_window_zoom" "󰁌")
   local custom_icon_window_mark=$(get_tmux_option "@catppuccin_icon_window_mark" "󰃀")
   local custom_icon_window_silent=$(get_tmux_option "@catppuccin_icon_window_silent" "󰂛")
-  local custom_icon_window_activity=$(get_tmux_option "@catppuccin_icon_window_activity" "󰖲")
+  local custom_icon_window_activity=$(get_tmux_option "@catppuccin_icon_window_activity" "󱅫")
   local custom_icon_window_bell=$(get_tmux_option "@catppuccin_icon_window_bell" "󰂞")
 
   if [ "$window_status_icon_enable" = "yes" ]
   then
     # #!~[*-]MZ
-    local show_window_status="#{?window_activity_flag,${custom_icon_window_activity},}#{?window_bell_flag,${custom_icon_window_bell},}#{?window_silence_flag,${custom_icon_window_silent},}#{?window_active,${custom_icon_window_current},}#{?window_last_flag,${custom_icon_window_last},}#{?window_marked_flag,${custom_icon_window_mark},}#{?window_zoomed_flag,${custom_icon_window_zoom},}"
+    local show_window_status=""
+    show_window_status+="#{?window_activity_flag, ${custom_icon_window_activity},}"
+    show_window_status+="#{?window_bell_flag, ${custom_icon_window_bell},}"
+    show_window_status+="#{?window_silence_flag, ${custom_icon_window_silent},}"
+    show_window_status+="#{?window_active, ${custom_icon_window_current},}"
+    show_window_status+="#{?window_last_flag, ${custom_icon_window_last},}"
+    show_window_status+="#{?window_marked_flag, ${custom_icon_window_mark},}"
+    show_window_status+="#{?window_zoomed_flag, ${custom_icon_window_zoom},}"
+
   fi
 
   if [ "$window_status_icon_enable" = "no" ]
   then
-    local show_window_status="#F"
+    local show_window_status=" #F"
   fi
 
   echo "$show_window_status"
@@ -133,7 +140,7 @@ build_window_format() {
   if [ "$window_status_enable" = "yes" ]
   then
     local icon="$( build_window_icon )"
-    text="$text $icon"
+    text="$text$icon"
   fi
 
   if [ "$fill" = "none" ]
@@ -322,11 +329,14 @@ main() {
   local modules_pane_path=$PLUGIN_DIR/pane
 
   # status
-  set status "on"
+<<<<<<< HEAD
+  local status_default=$(get_tmux_option "@catppuccin_status_default" "on")
+  local status_justify=$(get_tmux_option "@catppuccin_status_justify" "left")
+  set status "$status_default"
+  set status-justify "$status_justify"
   set status-bg default
   set status-style bg=default
   set status-left-style fg=default,bg=default
-  set status-justify "left"
   set status-left-length "100"
   set status-right-length "100"
   set status-position top
@@ -343,7 +353,10 @@ main() {
   local pane_status_enable=$(get_tmux_option "@catppuccin_pane_status_enabled" "no") # yes
   local pane_border_status=$(get_tmux_option "@catppuccin_pane_border_status" "off") # bottom
   local pane_border_style=$(get_tmux_option "@catppuccin_pane_border_style" "fg=${thm_gray}")
-  local pane_active_border_style=$(get_tmux_option "@catppuccin_pane_active_border_style" "fg=${thm_orange}")
+  local pane_active_border_style=$(\
+    get_tmux_option "@catppuccin_pane_active_border_style" \
+    "#{?pane_in_mode,fg=${thm_yellow},#{?pane_synchronized,fg=${thm_magenta},fg=${thm_orange}}}"
+  )
   local pane_left_separator=$(get_tmux_option "@catppuccin_pane_left_separator" "█")
   local pane_middle_separator=$(get_tmux_option "@catppuccin_pane_middle_separator" "█")
   local pane_right_separator=$(get_tmux_option "@catppuccin_pane_right_separator" "█")

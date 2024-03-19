@@ -10,4 +10,3 @@
 ## Reference
 [omexx/dotfiles](https://github.com/omerxx/dotfiles)\
 [migueltc13/catppuccin-tmux](https://github.com/migueltc13/catppuccin-tmux)
-
